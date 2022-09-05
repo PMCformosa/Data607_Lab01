@@ -1,0 +1,45 @@
+---
+title: "Assignment_607_1"
+author: "Pei-Ming Chen"
+date: "`r Sys.Date()`"
+output: openintro::lab_report
+---
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(openintro)
+library(plyr)
+```
+
+### Introduction
+https://projects.fivethirtyeight.com/2022-election-forecast/
+https://github.com/fivethirtyeight/data/tree/master/election-forecasts-2022
+The loaded senator data was from these two websites. 
+
+```{r load_senator_data}
+mydata <-read.csv("https://raw.githubusercontent.com/PMCformosa/Data607_Lab01/main/senate_steps_2022.csv", sep=",")
+```
+
+
+### Rename Column
+
+Headers of the table were re-phrase in a much easier understood one 
+
+```{r rename_column}
+mydata <- rename(mydata, c("candidateA"="Candidate_A", "candidateB"="Candidate_B","displaystep"="Calculation_Step"))
+```
+
+
+### Subset data
+
+The first step of displaystep of the Candidatess with margin between -5 to 5 were chosen. 
+
+```{r plot-prop-boys-arbuthnot}
+subset(mydata, (margin > -5 & margin < 5) & Calculation_Step==1, select = c(branch, district, forecastdate, margin, Candidate_A, Candidate_B))
+```
+
+### Conclusion
+
+I chose the data column that most people interest in the senator election. The purpose is to let people understand this piece of data much easier. 
+
+
